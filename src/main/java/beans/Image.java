@@ -8,10 +8,15 @@ public class Image {
 	private String title;
 	private Date date;
 	private String description;
-	
+	private String source;
 	private int albumId;
 	
-	
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
 	public String getUserName() {
 		return userName;
 	}
