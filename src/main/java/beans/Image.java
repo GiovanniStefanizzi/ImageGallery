@@ -3,6 +3,9 @@ package beans;
 public class Image {
 	private int id;
 	private String description;
+	private int album;
+	
+	
 	public int getId() {
 		return id;
 	}
