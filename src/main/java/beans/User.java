@@ -1,6 +1,7 @@
 package beans;
 
 public class User {
+	private int id;
 	private String userName;
 	private String email;
 	private String password;
@@ -23,6 +24,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

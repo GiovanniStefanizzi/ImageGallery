@@ -1,10 +1,12 @@
 package beans;
 
+import java.util.Date;
+
 public class Album {
 
 	private int id;
 	private String userName;
-	private String text;
+	private Date date;
 	
 	public int getId() {
 		return id;
@@ -18,11 +20,11 @@ public class Album {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getText() {
-		return text;
+	public Date getDate() {
+		return date;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	
