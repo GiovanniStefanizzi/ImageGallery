@@ -2,7 +2,9 @@ package utility;
 import java.io.*;
 import java.sql.*;
 import javax.servlet.*;
-
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.*;
 
 public class ConnectionHandler {
 	
@@ -27,9 +29,20 @@ public class ConnectionHandler {
 	}
 	
 
+	public TemplateEngine startTemplate(ServletContext context) {
+		TemplateEngine templateEngine = new TemplateEngine();
+		ServletContextTemplateResolver resolver = new ServletContextTemplateResolver(context);
+		resolver.setTemplateMode(TemplateMode.HTML);
+		templateEngine.setTemplateResolver(resolver);
+		resolver.setSuffix(".html");
+		return templateEngine;
+	}
+	
 	public void closeConnection(Connection connection) throws SQLException{
 		if (connection != null) {
 			connection.close();
 		}
 	}
+	
+	
 }
