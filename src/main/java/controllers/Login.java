@@ -11,17 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.StringEscapeUtils;
 
+import org.apache.commons.lang.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import dao.*;
-import beans.*;
-
+import beans.User;
+import dao.UserDAO;
 import utility.ConnectionHandler;
 
 @WebServlet("/Login")
