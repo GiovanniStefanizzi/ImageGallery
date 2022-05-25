@@ -2,10 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="UTF-8">
-<title>Image Gallery - Stefanizzi</title>
+<link rel="stylesheet" type="text/css" media="all" href="css/loginStyle.css"  th:href="@{css/loginStyle.css}" />
+<meta charset="ISO-8859-1">
+<title th:text="#{signin}"></title>
 </head>
-<body>
+<body>	
+	<h1 th:text = "#{index.welcome}">Welcome to your Image Gallery</h1>
+
+	<form th:action="@{/Login}" method="post">
+		<input type="text" name="username" placeholder="Username" required />
+		<input type="password" name="password" placeholder="Password" required />
+		<input type="submit"/>
+	</form>
 
 </body>
 </html>
