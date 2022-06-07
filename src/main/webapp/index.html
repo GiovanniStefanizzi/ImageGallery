@@ -7,13 +7,20 @@
 <title th:text="#{signin}"></title>
 </head>
 <body>	
-	<h1 th:text = "#{index.welcome}">Welcome to your Image Gallery</h1>
-
-	<form th:action="@{/Login}" method="post">
-		<input type="text" name="username" placeholder="Username" required />
-		<input type="password" name="password" placeholder="Password" required />
+	<h1 th:text = "#{index.welcome}">Welcome to your Image Gallery aooo</h1>
+	<a href = "Home">casa</a>
+	<form action="LoginPage" method="post">
+		<input type="text" name="username" placeholder="Username"  />
+		<input type="password" name="password" placeholder="Password"  />
 		<input type="submit"/>
+		
+		<a th:href = "@{/Home">pisedde?</a>
+		<p th:text=" ${errorMsg}"></p>
 	</form>
+	
+	<div align="right">
+		<a th:href="@{/Home}">Home</a>
+	</div>
 
 </body>
 </html>

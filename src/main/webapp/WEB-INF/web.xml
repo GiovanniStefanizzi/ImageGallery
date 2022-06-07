@@ -11,20 +11,13 @@
   </context-param>
   <context-param>
     <param-name>dbPassword</param-name>
-    <param-value>password</param-value>
+    <param-value>vrockpokey69</param-value>
   </context-param>
   <context-param>
     <param-name>dbDriver</param-name>
     <param-value>com.mysql.cj.jdbc.Driver</param-value>
   </context-param>
-  <filter>
-    <filter-name>Login</filter-name>
-    <filter-class>filters.checkLogin</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>Login</filter-name>
-    <url-pattern>/Home</url-pattern>
-  </filter-mapping>
+
   
   
   

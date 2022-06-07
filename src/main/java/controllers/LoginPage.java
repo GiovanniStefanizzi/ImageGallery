@@ -20,12 +20,12 @@ import beans.User;
 import dao.UserDAO;
 import utility.ConnectionHandler;
 
-@WebServlet("/Login")
+@WebServlet("/LoginPage")
 
-public class Login extends HttpServlet{
+public class LoginPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	public Login() {
+	public LoginPage() {
 		super();
 	}
 	
@@ -80,7 +80,7 @@ public class Login extends HttpServlet{
 		String path = "/index.html";
 		if (user == null) {
 			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-			ctx.setVariable("errorMsg", "icorrect username or password");
+			ctx.setVariable("errorMsg", "incorrect username or password");
 			templateEngine.process(path, ctx, response.getWriter());
 		} else {
 			request.getSession().setAttribute("user", user);
@@ -90,6 +90,5 @@ public class Login extends HttpServlet{
 
 	}
 	
-
 }
 

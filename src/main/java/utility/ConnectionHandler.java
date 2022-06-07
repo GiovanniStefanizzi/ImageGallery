@@ -41,9 +41,11 @@ public class ConnectionHandler {
 	}
 	
 	public void closeConnection(Connection connection) throws SQLException{
-		if (connection != null) {
-			connection.close();
-		}
+		try {
+			if (connection != null) 
+				connection.close();
+		} 
+		catch(SQLException sqle) {}
 	}
 	
 	
