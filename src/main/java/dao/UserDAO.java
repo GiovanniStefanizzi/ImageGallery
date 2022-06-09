@@ -24,15 +24,18 @@ public class UserDAO {
 				if(!res.isBeforeFirst()) // no result
 					return null;
 				else {
-					res.next();
+					if(res.next());
 					User user = new User();
 					user.setId(res.getInt("id"));
 					user.setUserName(res.getString("username"));
 					user.setEmail(res.getString("email"));
 					return user;
 				}
+				
 			}
 		}
 	}
+	
+	
 
 }
