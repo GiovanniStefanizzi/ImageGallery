@@ -13,11 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class checkLogin implements Filter {
+public class CheckLogin implements Filter {
 
-	public checkLogin() {
+	public CheckLogin() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void init(FilterConfig fConfig) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+	
 	
 	public void destroy() {
 		// TODO Auto-generated method stub

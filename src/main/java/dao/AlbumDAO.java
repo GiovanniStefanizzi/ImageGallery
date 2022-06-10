@@ -16,7 +16,7 @@ public class AlbumDAO {
 	}
 	
 	public List<Album> getUserAlbums(int ownerId) throws SQLException{
-		List<Album> albums = new ArrayList();
+		List<Album> albums = new ArrayList<Album>();
 		
 		String query = "SELECT * FROM imagegallery.album"+
 					   "WHERE ownerId = ?"+

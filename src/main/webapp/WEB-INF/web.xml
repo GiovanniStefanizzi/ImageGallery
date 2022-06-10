@@ -18,6 +18,15 @@
     <param-value>com.mysql.cj.jdbc.Driver</param-value>
   </context-param>
 
+
+<filter>
+        <filter-name>CheckLogin</filter-name>
+        <filter-class>filters.CheckLogin</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CheckLogin</filter-name>
+        <url-pattern>/Home</url-pattern>
+    </filter-mapping>
   
   
   

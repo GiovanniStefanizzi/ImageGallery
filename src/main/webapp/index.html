@@ -4,23 +4,28 @@
 <head>
 <link rel="stylesheet" type="text/css" media="all" href="css/loginStyle.css"  th:href="@{css/loginStyle.css}" />
 <meta charset="ISO-8859-1">
-<title th:text="#{signin}"></title>
+<title>Image Gallery</title>
 </head>
 <body>	
-	<h1 th:text = "#{index.welcome}">Welcome to your Image Gallery aooo</h1>
-	<a href = "Home">casa</a>
-	<form action="LoginPage" method="post">
-		<input type="text" name="username" placeholder="Username"  />
-		<input type="password" name="password" placeholder="Password"  />
-		<input type="submit"/>
-		
-		<a th:href = "@{/Home">pisedde?</a>
-		<p th:text=" ${errorMsg}"></p>
+	<h1>Welcome to your Image Gallery</h1>
+	<h2>Login</h2>
+	<form action="Login" method="post">
+		<input type="text" name="username" placeholder="Username" required />
+		<input type="password" name="password" placeholder="Password"  required/>
+		<input type="submit" />
 	</form>
-	
-	<div align="right">
-		<a th:href="@{/Home}">Home</a>
-	</div>
-
+	<h2>Subscribe</h2>
+	<form action = "Register" method="post">
+		<input type="text" name="username" placeholder="Username"  />
+		<input type="text" name="email" placeholder="Email"  />
+		<input type="password" name="password" placeholder="Password"  />
+		<input type="text" name="repeatedpassword" placeholder="Repeat Password"  />
+		<input type="submit"/>
+	</form>
+	<p th:text=" ${errorMsg}"></p>
+	<p th:text=" ${passwordErrorMsg}"></p>
+	<p th:text=" ${usernameErrorMsg}"></p>
+	<p th:text=" ${emailErrorMsg}"></p>
+	<p th:text=" ${existingAccountErrorMsg}"></p>
 </body>
 </html>

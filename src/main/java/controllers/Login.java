@@ -20,12 +20,12 @@ import beans.User;
 import dao.UserDAO;
 import utility.ConnectionHandler;
 
-@WebServlet("/LoginPage")
+@WebServlet("/Login")
 
-public class LoginPage extends HttpServlet{
+public class Login extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	public LoginPage() {
+	public Login() {
 		super();
 	}
 	
