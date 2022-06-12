@@ -25,13 +25,13 @@ import utility.ConnectionHandler;
 
 
 
-@WebServlet("/Home")
-public class Home extends HttpServlet {
+@WebServlet("/Album")
+public class AlbumPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
 	private Connection connection;
 
-	public Home() {
+	public AlbumPage() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,49 +41,14 @@ public class Home extends HttpServlet {
 		this.templateEngine = ConnectionHandler.instance.startTemplate(context);
 		connection = ConnectionHandler.instance.ConnectDb(context);
 	}
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-
-		
-		AlbumDAO albumDao = new AlbumDAO(connection);
-		
-		List <Album> userAlbums = null;
-		List <Album> otherUserAlbums = null;
-		
-
-		ServletContext servletContext = getServletContext();
 		
 		
-	/*	
-		try {
-			userAlbums = albumDao.getUserAlbums((int)servletContext.getAttribute());
-		}catch (SQLException e) {
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to recover albums");
-			return;
-		}
-	*/
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		String path = "/WEB-INF/Home.html";
-		servletContext = getServletContext();
-		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-		templateEngine.process(path, ctx, response.getWriter());
 	}
+	
+	
+}	
+	
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-}

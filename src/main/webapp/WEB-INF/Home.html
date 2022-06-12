@@ -10,8 +10,23 @@
 
 
 <body>
-	<h1 th:text = "${session.user.userName}"></h1>
-	<a th:href="@{Home}">Home Page</a>
-    <h1>prova</h1>
+	<h1 th:text = "${'Welcome, ' + session.user.userName + '!'}"></h1>
+	
+	<div th:if="${useralbums.size() == 0}" class="card">
+			<div class="primary_heading">You have no albums yet, create a new one!</div>
+	
+	</div>
+	
+	<div th:if="${useralbums.size() > 0}" class="card">
+			<div th:remove="all-but-first" class="two columns">
+			<div th:each="a : ${useralbums}" class="album">
+				<div>
+					<h4 th:text="${a.date}">2020-05-17</h4>
+					<h3 th:text="${a.title}">Inspirational Art Images</h3>
+				</div>
+				<a href="#" th:href="@{/Album(album = ${a.id})}" class="animation background">SHOW</a>
+			</div>
+			</div>
+	</div>
 </body>
 </html>

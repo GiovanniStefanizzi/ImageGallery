@@ -24,10 +24,10 @@ import utility.ConnectionHandler;
 
 @WebServlet("/Register")
 
-public class Register extends HttpServlet{
+public class RegisterPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	public Register() {
+	public RegisterPage() {
 		super();
 	}
 	

@@ -22,10 +22,10 @@ import utility.ConnectionHandler;
 
 @WebServlet("/Login")
 
-public class Login extends HttpServlet{
+public class LoginPage extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	public Login() {
+	public LoginPage() {
 		super();
 	}
 	

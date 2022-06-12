@@ -1,4 +1,5 @@
 h1{
+	display: table-cell;
 	background : orange;
 	color: green;
 	font : arial;
