@@ -2,6 +2,8 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,11 +11,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import beans.Album;
+import beans.User;
+import dao.AlbumDAO;
 import utility.ConnectionHandler;
 
 
@@ -38,8 +45,37 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String path = "/WEB-INF/Home.html";
+
+		
+		AlbumDAO albumDao = new AlbumDAO(connection);
+		
+		List <Album> userAlbums = null;
+		List <Album> otherUserAlbums = null;
+		
+
 		ServletContext servletContext = getServletContext();
+		
+		
+	/*	
+		try {
+			userAlbums = albumDao.getUserAlbums((int)servletContext.getAttribute());
+		}catch (SQLException e) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to recover albums");
+			return;
+		}
+	*/
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		String path = "/WEB-INF/Home.html";
+		servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		templateEngine.process(path, ctx, response.getWriter());
 	}

@@ -66,4 +66,34 @@ public class UserDAO {
 		}
 		return true;
 	}		
+	
+	public User registerUser(String username, String email, String password) throws SQLException{
+		
+		User user = new User();
+		user.setUserName(username);
+		user.setEmail(email);
+		user.setPassword(password);
+		
+		String query ="INSERT INTO imagegallery.user (userName, email, password) VALUES (?, ?, ?)";
+		
+		try (PreparedStatement pStatement = connection.prepareStatement(query);) {
+			
+			pStatement.setString(1, user.getUserName());
+			pStatement.setString(2, user.getEmail());
+			pStatement.setString(3, user.getPassword());
+
+
+			try {
+				int result = pStatement.executeUpdate();
+				if(result > 0)
+					return user;
+				else return null;
+			}
+			catch (SQLException e){
+				connection.rollback();
+				// statement.rollback
+				return null;
+			}
+		}
+	}
 }

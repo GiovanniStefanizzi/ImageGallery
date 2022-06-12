@@ -117,7 +117,7 @@ public class Register extends HttpServlet{
 			response.sendError(HttpServletResponse.SC_BAD_GATEWAY, "Failure in database credential checking");
 			return;
 		}
-		if(alreadyTakenUsername) ctx.setVariable("existingAccountErrorMsg", "there is an existing account with this email ");
+		if(alreadyTakenEmail) ctx.setVariable("existingAccountErrorMsg", "there is an existing account with this email ");
 		
 		if(wrongEmailFormat || alreadyTakenUsername || alreadyTakenEmail || passwordNotMatching) {
 			String path = "/index.html";
@@ -125,18 +125,24 @@ public class Register extends HttpServlet{
 			return;
 		}
 		
-		//TODO: inserire l'user nella base di dati, prenderlo, metterlo nella sessione e andare a Home
-		else {
-			
-			/*		
-			
-			
+		//insert the user in the database
+		User user = null;
+		try {
+			user = userDao.registerUser(username, email, password);
+		} catch (SQLException e) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failure in database registration process");
+			return;
+		}
+
+		// If the user exists, add info to the session and go to home page, otherwise
+		// return an error message
+		if (user == null) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failure in database registration process");
+			return;
+		} else {
 			request.getSession().setAttribute("user", user);
-			path = getServletContext().getContextPath() + "/Home";
+			String path = getServletContext().getContextPath() + "/Home";
 			response.sendRedirect(path);
-			
-			
-			*/
 		}
 
 	}

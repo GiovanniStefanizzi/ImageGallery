@@ -4,13 +4,14 @@
 <head>
 <link rel="stylesheet" type="text/css" media="all" href="css/loginStyle.css"  th:href="@{css/loginStyle.css}" />
 <meta charset="ISO-8859-1">
-<title>Sign Up</title>
+<title>Home Page</title>
 </head>
 
 
 
 <body>
-	<a th:href="@{Home}">diogane</a>
-    <h1>porcoddioooooooooooooooooooooooooooooooo</h1>
+	<h1 th:text = "${session.user.userName}"></h1>
+	<a th:href="@{Home}">Home Page</a>
+    <h1>prova</h1>
 </body>
 </html>
