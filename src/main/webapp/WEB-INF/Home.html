@@ -11,6 +11,7 @@
 
 <body>
 	<h1 th:text = "${'Welcome, ' + session.user.userName + '!'}"></h1>
+
 	
 	<div th:if="${useralbums.size() == 0}" class="card">
 			<div class="primary_heading">You have no albums yet, create a new one!</div>
@@ -28,5 +29,33 @@
 			</div>
 			</div>
 	</div>
+	
+	<div>
+		<form action = "Home" method = "post">
+			<input type = "text" name ="title">
+			<input type = "submit" name = "create">
+		</form>
+	</div>
+	
+	
+	<div th:if="${otheralbums.size() == 0}" class="card">
+			<div class="primary_heading">There are no albums yet</div>
+	
+	</div>
+	
+	<div th:if="${otheralbums.size() > 0}" class="card">
+			<div th:remove="all-but-first" class="two columns">
+			<div th:each="a : ${otheralbums}" class="album">
+				<div>
+					<h4 th:text="${a.date}">2020-05-17</h4>
+					<h4 th:text="${a.ownerUserName}"></h4>
+					<h3 th:text="${a.title}">Inspirational Art Images</h3>
+				</div>
+				<a href="#" th:href="@{/Album(album = ${a.id})}" class="animation background">SHOW</a>
+			</div>
+			</div>
+	</div>
+	
+	
 </body>
 </html>

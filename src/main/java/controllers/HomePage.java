@@ -49,6 +49,7 @@ public class HomePage extends HttpServlet {
 		AlbumDAO albumDao = new AlbumDAO(connection);
 		List <Album> userAlbums = null;
 		List <Album> otherAlbums = null;
+
 		
 		User user = (User)request.getSession().getAttribute("user");		
 		int userId = user.getId();
@@ -69,6 +70,7 @@ public class HomePage extends HttpServlet {
 		try {
 			otherAlbums = albumDao.getOtherAlbums(user.getId());
 		}catch (SQLException e) {
+			e.printStackTrace();
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Not possible to recover albums");
 			return;
 		}
@@ -98,6 +100,7 @@ public class HomePage extends HttpServlet {
 			albumDao.createAlbum(userId, title);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failure in album creation process");
 			return;
 		}

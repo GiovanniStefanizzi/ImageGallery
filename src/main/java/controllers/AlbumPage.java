@@ -45,6 +45,8 @@ public class AlbumPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		int albumId = Integer.parseInt(request.getParameter("album"));
+		
 		
 	}
 	

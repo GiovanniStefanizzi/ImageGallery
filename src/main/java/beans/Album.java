@@ -6,6 +6,7 @@ public class Album {
 
 	private int id;
 	private int ownerId;
+	private String ownerUserName;
 	private Date date;
 	private String title;
 	
@@ -13,6 +14,12 @@ public class Album {
 	
 	public String getTitle() {
 		return title;
+	}
+	public String getOwnerUserName() {
+		return ownerUserName;
+	}
+	public void setOwnerUserName(String ownerUserName) {
+		this.ownerUserName = ownerUserName;
 	}
 	public void setTitle(String title) {
 		this.title = title;
