@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import beans.Album;
+import beans.Image;
 
 public class AlbumDAO {
 	private Connection connection;
@@ -87,5 +88,34 @@ public class AlbumDAO {
 	 }
 	 
 	 
-	
+	 
+	 //get five photos for the album web page
+	 
+	 public List<Image> getFiveImages(int albumId, int currentPage) throws SQLException {
+		 List<Image> images = new ArrayList<>();
+		 
+		 String queryString = "SELECT * FROM imagegallery " +
+				 				"WHERE AlbumId = ? ORDER BY Date DESC LIMIT 5 OFFSET ?";
+		 
+		 
+		 try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
+			 preparedStatement.setInt(1, albumId);
+			 preparedStatement.setInt(2, currentPage);
+			 
+			 try(ResultSet result = preparedStatement.executeQuery()){
+				 while(result.next()) {
+					 Image img = new Image();
+					 img.setAlbumId(result.getInt("idAlbum"));
+					 img.setId(result.getInt("idImage"));
+					 img.setTitle(result.getString("title"));
+					 img.setDescription(result.getString("description"));
+					 img.setDate(result.getDate("date"));
+					 img.setSource(result.getString("source"));
+					 images.add(img);
+				 }
+			 } 
+		 } 
+		 return images;
+	 }
+	 
 }

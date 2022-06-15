@@ -45,8 +45,15 @@ public class AlbumPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		int albumId = Integer.parseInt(request.getParameter("album"));
-		
+		try {
+			int albumId = Integer.parseInt(request.getParameter("album"));
+			int currentPage = Integer.parseInt(request.getParameter("page"));
+			int selectedImg = Integer.parseInt(request.getParameter("img"));
+			
+		} catch (NumberFormatException | NullPointerException e){
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
+			return;
+		}
 		
 	}
 	
