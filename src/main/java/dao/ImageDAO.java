@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.cj.xdevapi.Result;
+
 import beans.Image;
 
 public class ImageDAO {
@@ -27,7 +29,7 @@ public class ImageDAO {
 			preparedStatement.setInt(1, idImage);
 			try(ResultSet result = preparedStatement.executeQuery()){
 				while (result.next()){
-					img.setAlbumId(result.getInt("idAlbum"));
+					 img.setAlbumId(result.getInt("idAlbum"));
 					 img.setId(result.getInt("idImage"));
 					 img.setTitle(result.getString("title"));
 					 img.setDescription(result.getString("description"));
@@ -40,5 +42,41 @@ public class ImageDAO {
 		
 		return img;
 	}
+	
+	
+	public int getTotalPages(int idAlbum) throws SQLException {
+		//select the smallest integer which is greater than, or equal to total_images / 5
+		String queryString = "SELECT CEIL(COUNT(*)/5) FROM imagegallery.image WHERE idAlbum = ?";
+		int pages = 1;
+		
+		try(PreparedStatement preparedStatement = connection.prepareStatement(queryString)){
+			preparedStatement.setInt(1, idAlbum);
+			try(ResultSet result = preparedStatement.executeQuery()){
+				while(result.next()) {
+					pages = result.getInt(1);
+				}
+			}	
+			
+		}
+		
+		return pages;
+	}
+	
+	public void insertImage(String title, String description, int idAlbum, String source) throws SQLException{
+        String queryString = "INSERT INTO image(title, description, idAlbum, source, date) VALUES (?, ?, ?, ?, ?)";
+        long millis=System.currentTimeMillis();  
+		java.sql.Date date = new java.sql.Date(millis);  
+        connection.setAutoCommit(false);
+        
+        try(PreparedStatement preparedStatement = connection.prepareStatement(queryString)){
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, description);
+            preparedStatement.setInt(3, idAlbum);
+            preparedStatement.setString(4, source);
+            preparedStatement.setDate(5, date);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        }
+    }
 	
 }
