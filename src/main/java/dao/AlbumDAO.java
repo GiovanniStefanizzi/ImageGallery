@@ -111,7 +111,19 @@ public class AlbumDAO {
 		} 		
 	 }
 	 
+	 //get the number of pages of the selected album
 	 
+	    public int getPageCount(int albumId) throws SQLException{
+	        String query = "SELECT CEIL(COUNT(*)/5) FROM imagegallery.image WHERE idAlbum=?";
+	        try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+	        	preparedStatement.setInt(1, albumId);
+	            try(ResultSet res = preparedStatement.executeQuery();){
+	                if (res.next()) return res.getInt(1);
+	                return 1;
+	            }
+	        }
+	    }
+	   
 	 
 	 //get five photos for the album web page
 	 

@@ -13,25 +13,25 @@
 	<h1 th:text = "${'Welcome, ' + session.user.userName + '!'}"></h1>
 
 	
-	<div th:if="${useralbums.size() == 0}" class="card">
-			<div class="primary_heading">You have no albums yet, create a new one!</div>
+	<div th:if="${useralbums.size() == 0}">
+			<div>You have no albums yet, create a new one!</div>
 	
 	</div>
 	
-	<div th:if="${useralbums.size() > 0}" class="card">
-			<div th:remove="all-but-first" class="two columns">
-			<div th:each="a : ${useralbums}" class="album">
+	<div th:if="${useralbums.size() > 0}">
+			<div th:remove="all-but-first" >
+			<div th:each="a : ${useralbums}">
 				<div>
 					<h4 th:text="${a.date}">2020-05-17</h4>
 					<h3 th:text="${a.title}">Inspirational Art Images</h3>
 				</div>
-				<a href="#" th:href="@{/Album(album = ${a.id})}" class="animation background">SHOW</a>
+				<a th:href="@{/Album(album = ${a.id}, page = 1)}" class="animation background">SHOW</a>
 			</div>
 			</div>
 	</div>
 	
 	<div>
-		<form action = "Home" method = "post">
+		<form action = "@{/Home}" method = "post">
 			<input type = "text" name ="title">
 			<input type = "submit" name = "create">
 		</form>
@@ -51,7 +51,7 @@
 					<h4 th:text="${a.ownerUserName}"></h4>
 					<h3 th:text="${a.title}">Inspirational Art Images</h3>
 				</div>
-				<a href="#" th:href="@{/Album(album = ${a.id})}" class="animation background">SHOW</a>
+				<a  th:href="@{/Album(album = ${a.id})}" class="animation background">SHOW</a>
 			</div>
 			</div>
 	</div>

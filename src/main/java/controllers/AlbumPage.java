@@ -19,8 +19,10 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import beans.Album;
+import beans.Image;
 import beans.User;
 import dao.AlbumDAO;
+import dao.ImageDAO;
 import utility.ConnectionHandler;
 
 
@@ -45,16 +47,40 @@ public class AlbumPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		Integer albumId = null;
+		Integer currentPage = null;
+		
 		try {
-			int albumId = Integer.parseInt(request.getParameter("album"));
-			int currentPage = Integer.parseInt(request.getParameter("page"));
-			int selectedImg = Integer.parseInt(request.getParameter("img"));
-			
+			albumId = Integer.parseInt(request.getParameter("album"));
+			currentPage = Integer.parseInt(request.getParameter("page"));
+			//int selectedImg = Integer.parseInt(request.getParameter("img"));
 		} catch (NumberFormatException | NullPointerException e){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 			return;
 		}
+		if(albumId == null || currentPage == null) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
+		}
 		
+		AlbumDAO albumDao = new AlbumDAO(connection);
+		ImageDAO imageDao = new ImageDAO(connection);
+		//TODO: add CommentDAO, handle comments
+		
+		
+		try {
+			Album album = albumDao.getById(albumId);
+			if(album == null) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Selected album does not exist");
+			}
+			int pageCount = albumDao.getPageCount(album.getId());
+			if(currentPage < 1 || currentPage > pageCount) currentPage = 1;
+			
+			
+			List<Image> images = albumDao.getFiveImages(album.getId(), currentPage);
+		}
+		catch(SQLException e){
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error, resources not found");
+		}
 		
 		
 	}
