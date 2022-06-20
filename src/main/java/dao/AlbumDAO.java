@@ -1,4 +1,5 @@
 package dao;
+import java.lang.invoke.StringConcatFactory;
 import java.sql.Connection;
 import java.time.LocalDateTime;  
 import java.time.format.DateTimeFormatter;  
@@ -64,6 +65,29 @@ public class AlbumDAO {
 			}	
 		} 	
 		return albums;
+	}
+	
+	public Album getById(int albumId) throws SQLException {
+		Album album = null;
+		String query = "SELECT * FROM imagegallery.album WHERE idAlbum = ?";
+		
+		
+		
+		try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
+			preparedStatement.setInt(1, albumId);
+			try(ResultSet result = preparedStatement.executeQuery()){
+				if (result.next()){
+					album = new Album();
+					album.setOwnerId(result.getInt("ownerId"));
+					album.setDate(result.getDate("date"));
+					album.setId(result.getInt("idAlbum"));
+					album.setTitle(result.getString("title"));
+					album.setOwnerUserName(result.getString("userName"));
+				}
+			}	
+		} 	
+		return album;
+		
 	}
 	
 	
