@@ -77,10 +77,25 @@ public class AlbumPage extends HttpServlet {
 			
 			
 			List<Image> images = albumDao.getFiveImages(album.getId(), currentPage);
+			
+			ServletContext servletContext = getServletContext();
+			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());	
+			
+			ctx.setVariable("images", images);
+			ctx.setVariable("currentPage", currentPage);
+			ctx.setVariable("pageCount", pageCount);
+			ctx.setVariable("album", album);
+			
+			String path = "/WEB-INF/Album.html"; 
+			
+			templateEngine.process(path, ctx, response.getWriter());
+			
 		}
 		catch(SQLException e){
+			e.printStackTrace();
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error, resources not found");
 		}
+		
 		
 		
 	}

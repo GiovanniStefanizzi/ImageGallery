@@ -55,11 +55,18 @@ public class ImageUpload extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer albumId = null;
-		albumId = Integer.parseInt(request.getParameter("album"));
+		try {
+			albumId = Integer.parseInt(request.getParameter("albumId"));
+		}
+		catch(NumberFormatException e) {
+			e.printStackTrace();
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error getting albumId");
+			
+		}
 		Part filePart = request.getPart("image");
 		String title = StringEscapeUtils.escapeJava(request.getParameter("title"));
 		String description = StringEscapeUtils.escapeJava(request.getParameter("description"));
-		String path = System.getProperty("static.resources");
+		String path = System.getProperty("resources.images");
 		String imagePath = path + "/WEB-INF/resources/";
 		
 		
@@ -88,11 +95,14 @@ public class ImageUpload extends HttpServlet{
 				
 				//TODO: handle error
 			 }
-			 
 
 			 imageDAO.insertImage(title, description, albumId, imagePath);
 			 
+			path = getServletContext().getContextPath() + "Album?albumId="+album.getId()+"&page=1";
+			response.sendRedirect(path);
+			 
 		} catch (SQLException e) {
+			e.printStackTrace();
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "error in image creation");
 			return;
 		}

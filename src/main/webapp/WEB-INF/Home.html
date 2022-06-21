@@ -51,7 +51,7 @@
 					<h4 th:text="${a.ownerUserName}"></h4>
 					<h3 th:text="${a.title}">Inspirational Art Images</h3>
 				</div>
-				<a  th:href="@{/Album(album = ${a.id})}" class="animation background">SHOW</a>
+				<a  th:href="@{/Album(album = ${a.id}, page = 1)}" class="animation background">SHOW</a>
 			</div>
 			</div>
 	</div>

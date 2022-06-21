@@ -82,7 +82,6 @@ public class AlbumDAO {
 					album.setDate(result.getDate("date"));
 					album.setId(result.getInt("idAlbum"));
 					album.setTitle(result.getString("title"));
-					album.setOwnerUserName(result.getString("userName"));
 				}
 			}	
 		} 	
@@ -130,8 +129,8 @@ public class AlbumDAO {
 	 public List<Image> getFiveImages(int albumId, int currentPage) throws SQLException {
 		 List<Image> images = new ArrayList<>();
 		 
-		 String queryString = "SELECT * FROM imagegallery " +
-				 				"WHERE AlbumId = ? ORDER BY Date DESC LIMIT 5 OFFSET ?";
+		 String queryString = "SELECT * FROM imagegallery.image " +
+				 				"WHERE idAlbum = ? ORDER BY Date DESC LIMIT 5 OFFSET ?";
 		 
 		 
 		 try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {

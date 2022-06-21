@@ -17,13 +17,10 @@ public class ImageDAO {
 		this.connection = connection;
 	}
 	
-	
-	
 	public Image selectImage(int idImage)throws SQLException {
 		
 		Image img = new Image();
-		String queryString = "SELECT * FROM imagegallery.image WHERE idImage = ?";
-		
+		String queryString = "SELECT * FROM imagegallery.image WHERE idImage = ?";	
 		
 		try(PreparedStatement preparedStatement = connection.prepareStatement(queryString)){
 			preparedStatement.setInt(1, idImage);
@@ -38,28 +35,8 @@ public class ImageDAO {
 				}
 			}
 			
-		}	
-		
+		}			
 		return img;
-	}
-	
-	
-	public int getTotalPages(int idAlbum) throws SQLException {
-		//select the smallest integer which is greater than, or equal to total_images / 5
-		String queryString = "SELECT CEIL(COUNT(*)/5) FROM imagegallery.image WHERE idAlbum = ?";
-		int pages = 1;
-		
-		try(PreparedStatement preparedStatement = connection.prepareStatement(queryString)){
-			preparedStatement.setInt(1, idAlbum);
-			try(ResultSet result = preparedStatement.executeQuery()){
-				while(result.next()) {
-					pages = result.getInt(1);
-				}
-			}	
-			
-		}
-		
-		return pages;
 	}
 	
 	public void insertImage(String title, String description, int idAlbum, String source) throws SQLException{
