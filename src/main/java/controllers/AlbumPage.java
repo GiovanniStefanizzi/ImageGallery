@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.startup.Catalina;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -85,8 +87,9 @@ public class AlbumPage extends HttpServlet {
 			ctx.setVariable("currentPage", currentPage);
 			ctx.setVariable("pageCount", pageCount);
 			ctx.setVariable("album", album);
+			ctx.setVariable("source", System.getProperty("resources.images"));
 			
-			String path = "/WEB-INF/Album.html"; 
+			String path = "/WEB-INF/album.html"; 
 			
 			templateEngine.process(path, ctx, response.getWriter());
 			

@@ -11,18 +11,27 @@
 	
 	
 	<h1 th:text = "${pageCount}"></h1>
+
 	
-	<div th:if="${not #lists.isEmpty(images)}">
-	
-		<div>
-		<!-- add image details link -->
-			<p th:each = "image: ${images}">
-				<img th:src="@{|~/resources/images/${image.source}|}">
-				<h1 th:text = "${image.title}"></h1>
-			</p>
-		</div>
+	<table th:if="${not #lists.isEmpty(images)}">
+		<tbody>
 		
-	</div>
+		<!-- add image details link -->
+		<!-- th:href="@{/Album(albumId=${album.id},pageCount=${pageCount})}"-->
+		<tr>
+			<td th:each = "image: ${images}">
+				<p th:text = "${image.title}">title</p>
+				<img th:src="@{|/WEB-INF/resources/${image.source}|}">
+				
+			</td>
+		</tr>	
+		</tbody>
+		
+		
+	</table>
+	
+	<p>prova immagine</p>
+	<img src="/ImageGallery/WEB-INF/resources/CarteTOT_front6.jpg">
 	
 	
 	
