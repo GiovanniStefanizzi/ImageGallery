@@ -32,8 +32,8 @@ import utility.ConnectionHandler;
 @WebServlet("/Upload")
 @MultipartConfig(
 		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-		  maxFileSize = 1024 * 1024 * 10,      // 10 MB
-		  maxRequestSize = 1024 * 1024 * 100   // 100 MB
+		  maxFileSize = 1024 * 1024 * 40,      // 10 MB
+		  maxRequestSize = 1024 * 1024 * 100   // 100 MB 
 		)
 public class ImageUpload extends HttpServlet{
 
@@ -67,8 +67,8 @@ public class ImageUpload extends HttpServlet{
 		String title = StringEscapeUtils.escapeJava(request.getParameter("title"));
 		String description = StringEscapeUtils.escapeJava(request.getParameter("description"));
 		String path = System.getProperty("resources.images");
-		String imagePath = path + "/WEB-INF/resources/";
-		
+		String imagePath = path + "/resources/";
+		String fileSystemPath = "/resources/";
 		
 		
 		
@@ -79,6 +79,7 @@ public class ImageUpload extends HttpServlet{
 		
 		 User user = (User) request.getSession().getAttribute("user");
 		 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+		 fileSystemPath = fileSystemPath + fileName;
 		 File f = new File(imagePath + fileName);
 		 try (OutputStream output = new FileOutputStream(f);  InputStream file = filePart.getInputStream()){
 			 file.transferTo(output);
@@ -96,9 +97,9 @@ public class ImageUpload extends HttpServlet{
 				//TODO: handle error
 			 }
 
-			 imageDAO.insertImage(title, description, albumId, imagePath);
+			 imageDAO.insertImage(title, description, albumId, fileSystemPath);
 			 
-			path = getServletContext().getContextPath() + "Album?albumId="+album.getId()+"&page=1";
+			path = getServletContext().getContextPath() + "/Album?album="+album.getId()+"&page=1";
 			response.sendRedirect(path);
 			 
 		} catch (SQLException e) {

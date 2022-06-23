@@ -21,7 +21,8 @@
 		<tr>
 			<td th:each = "image: ${images}">
 				<p th:text = "${image.title}">title</p>
-				<img th:src="@{|/WEB-INF/resources/${image.source}|}">
+				
+					<img th:src="@{|${image.source}|}" class="thumb">
 				
 			</td>
 		</tr>	
@@ -29,10 +30,6 @@
 		
 		
 	</table>
-	
-	<p>prova immagine</p>
-	<img src="/ImageGallery/WEB-INF/resources/CarteTOT_front6.jpg">
-	
 	
 	
 

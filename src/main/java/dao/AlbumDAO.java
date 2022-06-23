@@ -135,7 +135,7 @@ public class AlbumDAO {
 		 
 		 try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 			 preparedStatement.setInt(1, albumId);
-			 preparedStatement.setInt(2, currentPage-1);
+			 preparedStatement.setInt(2, 5*(currentPage-1));
 			 
 			 try(ResultSet result = preparedStatement.executeQuery()){
 				 while(result.next()) {
