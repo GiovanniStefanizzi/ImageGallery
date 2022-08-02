@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.startup.Catalina;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -51,24 +52,30 @@ public class AddComment extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer imageId = null;
 		Integer albumId = null;
+		String text = null;
 		User user = null;
 		try {
+			user = (User)request.getSession().getAttribute("user");
 			imageId = Integer.parseInt(request.getParameter("image"));
 			albumId = Integer.parseInt(request.getParameter("album"));
-			user = .parseInt(request.getParameter("user"));
-			//int selectedImg = Integer.parseInt(request.getParameter("img"));
+			text = StringEscapeUtils.escapeJava(request.getParameter("text"));
 		} catch (NumberFormatException | NullPointerException e){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 			return;
 		}
-		if(imageId == null || albumId == null || userId == null) {
+		if(imageId == null || albumId == null || user == null || text == null) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 		}
 		
 		CommentDAO commentDAO = new CommentDAO(connection);
 		
-		
-		commentDAO.addComment(userDAO., getServletInfo());;
+		try {
+			commentDAO.addComment(imageId, user.getUserName(), text);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding comment");
+			e.printStackTrace();
+		};
 	}
 	
 

@@ -1,15 +1,17 @@
 package beans;
 
+import java.util.Date;
+
 public class Comment {
-	private int id;
 	private String userName;
 	private String text;
+	private Date date;
 	
-	public int getId() {
-		return id;
+	public Date getDate() {
+		return date;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public String getUserName() {
 		return userName;
@@ -23,6 +25,4 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
-	
 }

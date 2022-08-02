@@ -41,16 +41,21 @@ private Connection connection;
 	
 	
 
-	public void addComment(String userName, String text) throws SQLException {
+	public void addComment(int imageId, String userName, String text) throws SQLException {
 		    
-		 String query = "INSERT INTO imagegallery.comment(userName,text) VALUES (?,?)";
+		 String query = "INSERT INTO imagegallery.comment(imageId,userName,text,date) VALUES (?,?,?,?)";
+		 
+		 long millis=System.currentTimeMillis();  
+		 java.sql.Date date = new java.sql.Date(millis);  
 		 
 		
 		 connection.setAutoCommit(false);
 		 
 		 try(PreparedStatement preparedStatement = connection.prepareStatement(query)){
-				preparedStatement.setString(1, userName);
-				preparedStatement.setString(2, text);
+				preparedStatement.setInt(1, imageId);
+				preparedStatement.setString(2, userName);
+				preparedStatement.setString(3, text);
+				preparedStatement.setDate(4, date);
 				preparedStatement.executeUpdate();
 				connection.commit();
 		} 	
