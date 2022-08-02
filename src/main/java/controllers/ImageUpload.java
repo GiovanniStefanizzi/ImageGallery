@@ -32,7 +32,7 @@ import utility.ConnectionHandler;
 @WebServlet("/Upload")
 @MultipartConfig(
 		  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-		  maxFileSize = 1024 * 1024 * 40,      // 10 MB
+		  maxFileSize = 1024 * 1024 * 40,      // 40 MB
 		  maxRequestSize = 1024 * 1024 * 100   // 100 MB 
 		)
 public class ImageUpload extends HttpServlet{
