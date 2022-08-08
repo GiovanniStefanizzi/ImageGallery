@@ -25,7 +25,7 @@
 					<h4 th:text="${a.date}">2020-05-17</h4>
 					<h3 th:text="${a.title}">Inspirational Art Images</h3>
 				</div>
-				<a th:href="@{/Album(album = ${a.id}, page = 1)}" class="animation background">SHOW</a>
+				<a th:href="@{/Album(album = ${a.id}, page = 1, img = -1)}" class="animation background">SHOW</a>
 			</div>
 			</div>
 	</div>
@@ -55,6 +55,7 @@
 			</div>
 			</div>
 	</div>
+	
 	
 	
 </body>

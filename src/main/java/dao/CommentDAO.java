@@ -21,7 +21,7 @@ private Connection connection;
 	public List<Comment> getComments(int idImage) throws SQLException {
 		List<Comment> comments = new ArrayList<>();
 		
-		String queryString = "SELECT * from imagegallery.comment WHERE idImage = ? ORDER BY Date ASC";
+		String queryString = "SELECT * from imagegallery.comment WHERE imageId = ? ORDER BY Date ASC";
 		
 		try (PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 			preparedStatement.setInt(1,idImage);
@@ -31,7 +31,6 @@ private Connection connection;
 					Comment comment = new Comment();
 					comment.setText(result.getString("text"));
 					comment.setUserName(result.getString("userName"));
-					//TODO: vogliamo metterce puru la data?
 					comments.add(comment);
 				}
 			}
@@ -39,8 +38,6 @@ private Connection connection;
 		return comments;
 	}
 	
-	
-
 	public void addComment(int imageId, String userName, String text) throws SQLException {
 		    
 		 String query = "INSERT INTO imagegallery.comment(imageId,userName,text,date) VALUES (?,?,?,?)";

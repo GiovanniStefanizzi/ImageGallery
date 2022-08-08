@@ -1,27 +1,30 @@
 package beans;
 
 import java.util.Date;
+import java.util.List;
 
 public class Image {
 	private int id;
-	private String userName;
 	private String title;
 	private Date date;
 	private String description;
 	private String source;
 	private int albumId;
+	private List<Comment> comments;
+	
+	public List<Comment> getComments(){
+		return comments;
+	}
+	
+	public void addComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 	
 	public String getSource() {
 		return source;
 	}
 	public void setSource(String source) {
 		this.source = source;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 	public String getTitle() {
 		return title;
