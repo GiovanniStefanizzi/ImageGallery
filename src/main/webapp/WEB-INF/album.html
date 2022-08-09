@@ -9,8 +9,7 @@
 </head>
 <body>
 	
-	
-	<h1 th:text = "${pageCount}"></h1>
+
 
 	
 	<table th:if="${not #lists.isEmpty(images)}">
@@ -21,8 +20,10 @@
 		<tr>
 			<td th:each = "image: ${images}">
 				<p th:text = "${image.title}">title</p>	
-				<img th:src="@{|${image.source}|}" class="thumb">
-				<a th:href="@{/Album(album = ${album.id}, page = 1, img = 2)}" class="animation background">SHOW</a>
+				
+				<a th:href="@{/Album(album = ${album.id}, page = 1, img = ${imageStat.index})}" class="animation background">
+					<img th:src="@{|${image.source}|}" class="thumb">
+				</a>
 			</td>
 		</tr>	
 		</tbody>
@@ -33,20 +34,32 @@
 	<h1 th:text = "${imageIndex}">index</h1>
 	
         <table th:if="${imageIndex != -1}" id="tableDetail">
-            <caption>Image selected:</caption>
-
             <tbody>
-
-                    <tr th:text="${images[imageIndex].title}">title</tr>
+            
+                    <th>Title</th><td th:text="${images[imageIndex].title}">title</td>
                     <th>Date</th><td th:text="${images[imageIndex].date}">2020-02-02</td>
-                <tr>
                     <th>Description</th><td th:text="${images[imageIndex].description}">This is a description</td>
-                </tr>
-                <tr>
-                    <img th:src="@{|${images[imageIndex].source}|}"  class="original"/></td>
-                </tr>
-            </tbody>
+                    <img th:src="@{|${images[imageIndex].source}|}"  class="original"/>
+                    
+                    
+                    
+            </tbody>          
         </table>
+        
+        
+        <table th:if="${not #lists.isEmpty(images[imageIndex].comments)}">
+		<tbody>
+		
+		<tr>
+			<td th:each = "comment: ${images[imageIndex].comments}">
+				<p th:text = "${comment.userName}">user</p>	
+				<p th:text = "${comment.text}">text</p>
+			</td>
+		</tr>	
+		</tbody>
+		
+		
+	</table>
  
 	
 
