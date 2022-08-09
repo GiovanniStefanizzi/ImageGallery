@@ -18,41 +18,72 @@
 		<!-- add image details link -->
 		
 		<tr>
-			<td th:each = "image: ${images}">
-				<p th:text = "${image.title}">title</p>	
+			<td th:if="${currentPage} > 1"><a th:href="@{/Album(album = ${album.id}, page = ${currentPage - 1} , img = -1)}"><input type="submit" value="<"></a></td>
+			
+				<td th:each = "image: ${images}">
+					<p th:text = "${image.title}">title</p>	
 				
-				<a th:href="@{/Album(album = ${album.id}, page = 1, img = ${imageStat.index})}" class="animation background">
-					<img th:src="@{|${image.source}|}" class="thumb">
-				</a>
-			</td>
+					<a th:href="@{/Album(album = ${album.id}, page = ${currentPage}, img = ${imageStat.index})}" class="animation background">
+						<img th:src="@{|${image.source}|}" class="thumb">
+					</a>
+				</td>
+			
+			<td th:if="${currentPage + 1}  <= ${pageCount}"><a th:href="@{/Album(album = ${album.id}, page = ${currentPage + 1}, img = -1)}"><input type="submit" value=">"></a></td>
 		</tr>	
 		</tbody>
 		
 		
 	</table>
 	
+	
+	<form th:action="@{/Upload}" method="post"enctype="multipart/form-data">
+	
+		<input type="hidden" name="albumId" th:value="${album.id}" required />
+		<input type="file" name="image" required />
+		<input type="text" name="title" required />
+		<input type="text" name="description" required />
+		<input type="submit" value="Upload" />
+		
+	</form>
+	
+	
 	<h1 th:text = "${imageIndex}">index</h1>
 	
         <table th:if="${imageIndex != -1}" id="tableDetail">
             <tbody>
-            
+            	<tr>
+                	<td><img th:src="@{|${images[imageIndex].source}|}"  class="original"/></td>
+                </tr>
+            	<tr>
                     <th>Title</th><td th:text="${images[imageIndex].title}">title</td>
+                </tr>
+                <tr>	   
                     <th>Date</th><td th:text="${images[imageIndex].date}">2020-02-02</td>
+                </tr>
+                <tr>    
                     <th>Description</th><td th:text="${images[imageIndex].description}">This is a description</td>
-                    <img th:src="@{|${images[imageIndex].source}|}"  class="original"/>
+                </tr>
                     
-                    
-                    
+             
+                <tr>
+                	<td>
+                	<h3>inserisci un commento</h3>
+                		<form th:action="@{/Comments(user = session.user, image = ${images[imageIndex].id}, album = ${album.id})}" method="post">
+							<input type="text" name="text" placeholder="inserisci commento..." required /><input type="submit"/>
+
+						</form>
+					</td>
+				</tr>		
             </tbody>          
         </table>
         
         
+		
         <table th:if="${not #lists.isEmpty(images[imageIndex].comments)}">
 		<tbody>
-		
-		<tr>
-			<td th:each = "comment: ${images[imageIndex].comments}">
-				<p th:text = "${comment.userName}">user</p>	
+		<tr th:each = "comment: ${images[imageIndex].comments}">
+			<td >
+				<p th:text = "${comment.userName}">user class</p>	
 				<p th:text = "${comment.text}">text</p>
 			</td>
 		</tr>	
@@ -63,15 +94,7 @@
  
 	
 
-	<form th:action="@{/Upload}" method="post"enctype="multipart/form-data">
 	
-		<input type="hidden" name="albumId" th:value="${album.id}" required />
-		<input type="file" name="image" required />
-		<input type="text" name="title" required />
-		<input type="text" name="description" required />
-		<input type="submit" value="Upload" />
-		
-	</form>
 
 </body>
 </html>

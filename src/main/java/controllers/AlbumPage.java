@@ -94,7 +94,7 @@ public class AlbumPage extends HttpServlet {
 			}
 			ServletContext servletContext = getServletContext();
 			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());	
-			
+				
 			ctx.setVariable("images", images);
 			ctx.setVariable("imageIndex", imageIndex);
 			ctx.setVariable("currentPage", currentPage);

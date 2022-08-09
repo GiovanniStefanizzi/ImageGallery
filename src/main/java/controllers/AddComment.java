@@ -50,8 +50,10 @@ public class AddComment extends HttpServlet{
 	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer imageId = null;
 		Integer albumId = null;
+		Integer imageId = null;
+		//Integer currentPage = null;
+		//Integer selectedImg = null;
 		String text = null;
 		User user = null;
 		try {
@@ -59,11 +61,13 @@ public class AddComment extends HttpServlet{
 			imageId = Integer.parseInt(request.getParameter("image"));
 			albumId = Integer.parseInt(request.getParameter("album"));
 			text = StringEscapeUtils.escapeJava(request.getParameter("text"));
-		} catch (NumberFormatException | NullPointerException e){
+			//// TODO currentPage = Integer.parseInt(request.getParameter("page"));
+		    //selectedImg = Integer.parseInt(request.getParameter("img"));
+		} catch (NumberFormatException |  NullPointerException e){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 			return;
 		}
-		if(imageId == null || albumId == null || user == null || text == null) {
+		if(imageId == null || user == null || albumId == null || text == null) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 		}
 		
@@ -71,8 +75,9 @@ public class AddComment extends HttpServlet{
 		
 		try {
 			commentDAO.addComment(imageId, user.getUserName(), text);
+			//String path = getServletContext() + "/Album?album="+ albumId +"&page = " + currentPage + "&img = " + selectedImg;
+			//response.sendRedirect(path);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding comment");
 			e.printStackTrace();
 		};
