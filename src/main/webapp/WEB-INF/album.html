@@ -68,7 +68,7 @@
                 <tr>
                 	<td>
                 	<h3>inserisci un commento</h3>
-                		<form th:action="@{/Comments(user = session.user, image = ${images[imageIndex].id}, album = ${album.id})}" method="post">
+                		<form th:action="@{/Comments(user = session.user, image = ${images[imageIndex].id}, album = ${album.id}, currentPage = ${currentPage}, img=${imageIndex})}" method="post">
 							<input type="text" name="text" placeholder="inserisci commento..." required /><input type="submit"/>
 
 						</form>

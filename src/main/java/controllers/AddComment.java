@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,8 +53,8 @@ public class AddComment extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer albumId = null;
 		Integer imageId = null;
-		//Integer currentPage = null;
-		//Integer selectedImg = null;
+		Integer currentPage = null;
+		Integer selectedImg = null;
 		String text = null;
 		User user = null;
 		try {
@@ -61,8 +62,8 @@ public class AddComment extends HttpServlet{
 			imageId = Integer.parseInt(request.getParameter("image"));
 			albumId = Integer.parseInt(request.getParameter("album"));
 			text = StringEscapeUtils.escapeJava(request.getParameter("text"));
-			//// TODO currentPage = Integer.parseInt(request.getParameter("page"));
-		    //selectedImg = Integer.parseInt(request.getParameter("img"));
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		    selectedImg = Integer.parseInt(request.getParameter("img"));
 		} catch (NumberFormatException |  NullPointerException e){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 			return;
@@ -75,9 +76,10 @@ public class AddComment extends HttpServlet{
 		
 		try {
 			commentDAO.addComment(imageId, user.getUserName(), text);
-			//String path = getServletContext() + "/Album?album="+ albumId +"&page = " + currentPage + "&img = " + selectedImg;
-			//response.sendRedirect(path);
-		} catch (SQLException e) {
+			String path = request.getContextPath() + "/Album?album="+ albumId +"&page=" + currentPage + "&img=" + selectedImg;
+			System.out.println(path);
+			response.sendRedirect(path);
+		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding comment");
 			e.printStackTrace();
 		};
