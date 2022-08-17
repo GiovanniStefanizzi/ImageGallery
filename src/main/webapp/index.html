@@ -2,31 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<link rel="stylesheet" type="text/css" media="all" href="css/loginStyle.css"  th:href="@{css/loginStyle.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" media="all"
+	href="css/galleryStyle.css" th:href="@{css/galleryStyle.css}" />
+	
 <meta charset="ISO-8859-1">
 <title>Image Gallery</title>
 </head>
 <body>	
-	<h1>Welcome to your Image Gallery</h1>
-	<h2>Login</h2>
-	<form action="Login" method="post">
-		<input type="text" name="username" placeholder="Username" required />
-		<input type="password" name="password" placeholder="Password"  required/>
-		<input type="submit"/>
-	</form>
-	<h2>Subscribe</h2>
-	<form action = "Register" method="post">
+
+
+<div class = "container">
+	<div class = "Login">
+		<h1>Welcome to your Image Gallery</h1>
+		<h2>Login</h2>
+		<form class="col-md-6" action="Login" method="post">
+			<div class = "row">
+				<label for="username">Username</label>
+				<input type="text" name="username" placeholder="Username" required />
+			</div>
+			<div class = "row">
+			<label for="password">Password</label>
+			<input type="password" name="password" placeholder="Password"  required/>
+			</div>
+			<input type="submit"/>
+		</form>
+		
+		<h2>Subscribe</h2>
+	<form class = "form-group" action = "Register" method="post">
 		<input type="text" name="username" placeholder="Username"  />
-		<input type="text" name="email" placeholder="Email"  />
+		<input type="email" name="email" placeholder="Email"  />
 		<input type="password" name="password" placeholder="Password"  />
 		<input type="password" name="repeatedpassword" placeholder="Repeat Password"  />
-		<input type="submit"/>
+		<input class="btn btn-primary" type="submit"/>
 	</form>
 	<p th:text=" ${errorMsg}"></p>
 	<p th:text=" ${passwordErrorMsg}"></p>
 	<p th:text=" ${usernameErrorMsg}"></p>
 	<p th:text=" ${emailErrorMsg}"></p>
 	<p th:text=" ${existingAccountErrorMsg}"></p>
-	
+	</div>
+</div>
 </body>
 </html>

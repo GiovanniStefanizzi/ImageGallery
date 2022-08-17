@@ -1,0 +1,23 @@
+
+
+body{
+	display : flex;
+	align-items:center;
+	justify-content : center;
+	background : blue;
+}
+
+
+
+.Login{
+	background : white;
+	margin :200px;
+	border-radius : 10px;
+}
+
+.thumb{
+  width:300px;
+  height:300px;
+  object-fit: cover;
+  position: right;
+}
