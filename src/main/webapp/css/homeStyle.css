@@ -1,0 +1,53 @@
+body{
+	
+	align-items:center;
+}
+
+nav{
+	max-width:100%;
+}
+
+h1{
+	color:white;
+	margin-left: 75px;
+	text-shadow: 1px 1px 5px black;
+}
+
+h2{
+	color:#007bff;
+	margin-left:50px;
+	margin-top:20px;
+}
+
+h4{
+	color:#000095;
+}
+
+.column{
+	width: 100%;
+    margin: 30px;
+    margin-bottom: 10px;
+}
+
+.btn{
+	margin-block:5px;
+}
+
+.form-inline{
+	margin-left: 75px;
+	margin-right: 75px;
+	max-width: 100%;
+	min-width: 350px;
+}
+
+
+.card{
+	padding: 16px;
+	margin: 20px;
+	min-width:350px;
+	max-width:600px;
+	text-align: center;
+	background-color: white;
+	border-radius:10px;
+	box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}

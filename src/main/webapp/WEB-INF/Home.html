@@ -4,6 +4,8 @@
 <head>
 <link rel="stylesheet" type="text/css" media="all"
 	href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="css/homeStyle.css" th:href="@{css/homeStyle.css}" />	
 <meta charset="ISO-8859-1">
 <title>Home Page</title>
 </head>
@@ -11,7 +13,18 @@
 
 
 <body>
-	<h1 th:text = "${'Welcome, ' + session.user.userName + '!'}"></h1>
+
+	<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+  <ul class="navbar-nav">
+  <li class="nav-item active">
+      <a class="nav-link" th:text = "${'Welcome, ' + session.user.userName + '!'}"></a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-item" th:href="@{/Login}">Logout</a>
+    </li>
+  </ul>
+</nav>
+	
 
 	
 	<div th:if="${useralbums.size() == 0}">
@@ -19,22 +32,30 @@
 	
 	</div>
 	
-	<div th:if="${useralbums.size() > 0}">
-			<div th:remove="all-but-first" >
-			<div th:each="a : ${useralbums}">
-				<div>
-					<h4 th:text="${a.date}">2020-05-17</h4>
-					<h3 th:text="${a.title}">Inspirational Art Images</h3>
-				</div>
-				<a th:href="@{/Album(album = ${a.id}, page = 1, img = -1)}" class="animation background">SHOW</a>
-			</div>
-			</div>
-	</div>
 	
-	<div>
-		<form action = "@{/Home}" method = "post">
-			<input type = "text" name ="title">
-			<input type = "submit" name = "create">
+		<div th:if="${useralbums.size() > 0}">
+			<h2>Your albums</h2>
+				<div th:remove="all-but-first" >
+				<div class = "row">
+				<div th:each="a : ${useralbums}">
+					<div class = "column">
+						<div class = "card">
+							<div class = "label" th:text="${a.date}"></div>
+							<h3 th:text="${a.title}"></h3>
+							<a class = "btn btn-primary" th:href="@{/Album(album = ${a.id}, page = 1, img = -1)}">SHOW</a>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+		</div>
+	
+	
+	<div class= "form-inline">
+		<form  th:action = "@{/Home}" method = "post">
+			<h3 class = >create a new album</h3>
+			<input class = "form-control" type = "text" name ="title">
+			<input class = "btn btn-primary" type = "submit" value = "create">
 		</form>
 	</div>
 	
@@ -44,18 +65,25 @@
 	
 	</div>
 	
-	<div th:if="${otheralbums.size() > 0}" class="card">
-			<div th:remove="all-but-first" class="two columns">
-			<div th:each="a : ${otheralbums}" class="album">
-				<div>
-					<h4 th:text="${a.date}">2020-05-17</h4>
-					<h4 th:text="${a.ownerUserName}"></h4>
-					<h3 th:text="${a.title}">Inspirational Art Images</h3>
+
+		<div th:if="${otheralbums.size() > 0}">
+			<h2 class="w-100">Other albums</h2>
+				<div th:remove="all-but-first">
+				<div class = "row">
+				<div th:each="a : ${otheralbums}">
+					<div class = "column">
+						<div class = "card">
+							<div class = "label"th:text="${a.date}"></div>
+							<h4 th:text="${a.ownerUserName}"></h4>
+							<h3 th:text="${a.title}"></h3>
+							<a class = "btn btn-primary" th:href="@{/Album(album = ${a.id}, page = 1, img = -1)}">SHOW</a>
+						</div>	
+					</div>
+					
 				</div>
-				<a  th:href="@{/Album(album = ${a.id}, page = 1, img = -1)}" class="animation background">SHOW</a>
-			</div>
-			</div>
-	</div>
+				</div>
+				</div>
+		</div>
 	
 	
 	

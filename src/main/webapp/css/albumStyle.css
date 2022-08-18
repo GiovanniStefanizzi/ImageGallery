@@ -1,0 +1,41 @@
+.thumb{
+  width:290px;
+  height:290px;
+  object-fit: cover;
+  position: right;
+  border-radius:8px;
+}
+
+body{
+	align-items: center;
+}
+
+.details{
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.comments{
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.link{
+	color :white;
+}
+.form-inline{
+	margin: 20px;
+}
+.form-control{
+	margin: 5px;
+}
+
+h3{
+	color: #007bff;
+	margin:5px
+}
+.original{
+	max-width: 1400px;
+	max-height: 1000px;
+	margin:50px;
+}

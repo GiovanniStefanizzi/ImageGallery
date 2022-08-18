@@ -4,20 +4,31 @@ body{
 	display : flex;
 	align-items:center;
 	justify-content : center;
-	background : blue;
+	background : #007bff;
 }
 
 
 
 .Login{
+	text-align: center;
 	background : white;
-	margin :200px;
-	border-radius : 10px;
+	margin :70px;
+	border-radius : 15px;
+	min-width : 250px;
+	max-width : 500px;
+
 }
 
-.thumb{
-  width:300px;
-  height:300px;
-  object-fit: cover;
-  position: right;
+.btn-primary{
+	margin-block: 10px;
 }
+
+h1{
+	color :rgb(38, 66, 113)
+}
+
+h2{
+	color :#523A28;
+	margin-block: 10px;
+}
+

@@ -104,7 +104,8 @@ public class HomePage extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failure in album creation process");
 			return;
 		}
-		String path = getServletContext().getContextPath() + "/Album";
+		String path = getServletContext().getContextPath() + "/Home";
+		System.out.println(path);
 		response.sendRedirect(path);
 		
 	}

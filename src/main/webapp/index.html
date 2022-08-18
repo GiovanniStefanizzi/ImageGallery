@@ -4,7 +4,7 @@
 <head>
 <link rel="stylesheet" type="text/css" media="all"
 	href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-	<link rel="stylesheet" type="text/css" media="all"
+<link rel="stylesheet" type="text/css" media="all"
 	href="css/galleryStyle.css" th:href="@{css/galleryStyle.css}" />
 	
 <meta charset="ISO-8859-1">
@@ -13,30 +13,42 @@
 <body>	
 
 
-<div class = "container">
+<div class = "container-center">
 	<div class = "Login">
 		<h1>Welcome to your Image Gallery</h1>
 		<h2>Login</h2>
-		<form class="col-md-6" action="Login" method="post">
-			<div class = "row">
-				<label for="username">Username</label>
-				<input type="text" name="username" placeholder="Username" required />
+		<form class = "col-md" action="Login" method="post">
+			<div class = "form-group-center">
+				<label class = "form-label" for="username">Username</label>
+				<input class = "form-control" type="text" name="username" placeholder="Username" required />
 			</div>
-			<div class = "row">
-			<label for="password">Password</label>
-			<input type="password" name="password" placeholder="Password"  required/>
+			<div class = "form-group">
+				<label class="form-label" for="password">Password</label>
+				<input class = "form-control" type="password" name="password" placeholder="Password"  required/>
 			</div>
-			<input type="submit"/>
+			<input class="btn btn-primary col-md" type="submit"/>
 		</form>
 		
 		<h2>Subscribe</h2>
-	<form class = "form-group" action = "Register" method="post">
-		<input type="text" name="username" placeholder="Username"  />
-		<input type="email" name="email" placeholder="Email"  />
-		<input type="password" name="password" placeholder="Password"  />
-		<input type="password" name="repeatedpassword" placeholder="Repeat Password"  />
-		<input class="btn btn-primary" type="submit"/>
-	</form>
+		<form class="col-md" action = "Register" method="post">
+			<div class = "form-group">
+				<label class = "form-label" for="username">Username</label>
+				<input class = "form-control" type="text" name="username" placeholder="Username" required />
+			</div>
+			<div class = "form-group">
+				<label class = "form-label" for="email">Email</label>
+				<input class = "form-control" type="text" name="email" placeholder="Email" required />
+			</div>
+			<div class = "form-group">
+				<label class="form-label" for="password">Password</label>
+				<input class = "form-control" type="password" name="password" placeholder="Password"  required/>
+			</div>
+			<div class = "form-group">
+				<label class="form-label" for="password">Repeat password</label>
+				<input class = "form-control" type="password" name="repeatedpassword" placeholder = "Repeat password" required/>
+			</div>
+			<input class="btn btn-primary col-md" type="submit"/>
+		</form>
 	<p th:text=" ${errorMsg}"></p>
 	<p th:text=" ${passwordErrorMsg}"></p>
 	<p th:text=" ${usernameErrorMsg}"></p>
