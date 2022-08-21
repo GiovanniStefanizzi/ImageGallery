@@ -121,8 +121,7 @@ public class ImageUpload extends HttpServlet{
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "error in image creation");
 			return;
 		}
-		 
-		 
+
 		
 	}	
 }
