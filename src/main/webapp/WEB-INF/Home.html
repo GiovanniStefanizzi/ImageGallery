@@ -19,8 +19,8 @@
   <li class="nav-item active">
       <a class="nav-link" th:text = "${'Welcome, ' + session.user.userName + '!'}"></a>
     </li>
-    <li class="nav-item active">
-      <a class="nav-item" th:href="@{/Login}">Logout</a>
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/Login}">Logout</a>
     </li>
   </ul>
 </nav>
@@ -54,7 +54,7 @@
 	<div class= "form-inline">
 		<form  th:action = "@{/Home}" method = "post">
 			<h3 class = >create a new album</h3>
-			<input class = "form-control" type = "text" name ="title">
+			<input class = "form-control" type = "text" name ="title" required>
 			<input class = "btn btn-primary" type = "submit" value = "create">
 		</form>
 	</div>

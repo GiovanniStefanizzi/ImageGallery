@@ -38,7 +38,7 @@ public class LoginPage extends HttpServlet{
 		connection = ConnectionHandler.instance.ConnectDb(context);
 	}
 	
-/*	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = "/index.html";
 		ServletContext servletContext = getServletContext();
@@ -46,7 +46,7 @@ public class LoginPage extends HttpServlet{
 		templateEngine.process(path, ctx, response.getWriter());
 	}
 	
-*/	
+
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

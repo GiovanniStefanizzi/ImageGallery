@@ -77,7 +77,6 @@ public class AddComment extends HttpServlet{
 		try {
 			commentDAO.addComment(imageId, user.getUserName(), text);
 			String path = request.getContextPath() + "/Album?album="+ albumId +"&page=" + currentPage + "&img=" + selectedImg;
-			System.out.println(path);
 			response.sendRedirect(path);
 		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding comment");

@@ -71,13 +71,36 @@ public class ImageUpload extends HttpServlet{
 		String fileSystemPath = "/resources/";
 		
 		
-		
 		if (filePart == null || title == null || title.isEmpty() || description == null || description.isEmpty() || albumId == null){
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing parameters");
 			return;
 		}
 		
+		
 		 User user = (User) request.getSession().getAttribute("user");
+		 
+		
+		 
+		 AlbumDAO albumDAO = new AlbumDAO(connection);
+		 Album album;
+		 
+		 try {
+			 album = albumDAO.getById(albumId);
+			 if(album == null) {
+				 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Album not found");
+				 return;
+			 }
+			 if(album.getOwnerId()!= user.getId()) {
+					 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unauthorized upload attempt");
+				return;
+			 }
+		 }
+		 catch (SQLException e) {
+				e.printStackTrace();
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "error in image creation");
+				return;
+			}
+			 
 		 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 		 fileSystemPath = fileSystemPath + fileName;
 		 File f = new File(imagePath + fileName);
@@ -85,21 +108,12 @@ public class ImageUpload extends HttpServlet{
 			 file.transferTo(output);
 		 }
 		 
-		 AlbumDAO albumDAO = new AlbumDAO(connection);
 		 ImageDAO imageDAO = new ImageDAO(connection);
 		 
 		 try {
-			 Album album = albumDAO.getById(albumId);
-			 if(album == null) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Album not found");
-				return;
-				
-				//TODO: handle error
-			 }
-
 			 imageDAO.insertImage(title, description, albumId, fileSystemPath);
 			 
-			path = getServletContext().getContextPath() + "/Album?album="+album.getId()+"&page=1";
+			path = getServletContext().getContextPath() + "/Album?album="+album.getId()+"&page=1&img=-1";
 			response.sendRedirect(path);
 			 
 		} catch (SQLException e) {
