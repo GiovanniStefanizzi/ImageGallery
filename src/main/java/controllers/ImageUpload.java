@@ -67,7 +67,7 @@ public class ImageUpload extends HttpServlet{
 		String title = StringEscapeUtils.escapeJava(request.getParameter("title"));
 		String description = StringEscapeUtils.escapeJava(request.getParameter("description"));
 		String path = System.getProperty("resources.images");
-		String path2 = System.getProperty("resources.images");
+		String path2 = System.getProperty("resources.imagesRIA");
 		String imagePath = path + "/resources/";
 		String imagePath2 = path2 + "/resources/";
 		String fileSystemPath = "/resources/";
