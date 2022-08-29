@@ -71,12 +71,15 @@ public class AlbumPage extends HttpServlet {
 		AlbumDAO albumDao = new AlbumDAO(connection);
 		CommentDAO commentDao = new CommentDAO(connection);
 		//TODO: add CommentDAO, handle comments
+		Album album = null;
 		
 		
 		try {
-			Album album = albumDao.getById(albumId);
+			album = albumDao.getById(albumId);
 			if(album == null) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Selected album does not exist");
+				String path = getServletContext().getContextPath() + "/Home";
+				response.sendRedirect(path);
+				return;
 			}
 			int pageCount = albumDao.getPageCount(album.getId());
 			if(currentPage < 1 || currentPage > pageCount) currentPage = 1;
