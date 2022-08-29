@@ -29,6 +29,9 @@
 	<filter-mapping>
 		<filter-name>CheckLogin</filter-name>
 		<url-pattern>/Home</url-pattern>
+		<url-pattern>/Comments</url-pattern>
+		<url-pattern>/Album</url-pattern>
+		<url-pattern>/Upload</url-pattern>
 	</filter-mapping>
 
 
